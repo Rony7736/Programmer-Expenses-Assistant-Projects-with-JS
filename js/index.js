@@ -1,11 +1,12 @@
 
 // getting all the value
 
-
+let count = 0;
 // add event listener for calculate button
 
 document.getElementById('calculate').addEventListener('click', function(event){
 
+    count +=1;                                    // serial number er value barar jonno
     const income = Number(document.getElementById('income').value)
     const software = Number(document.getElementById('software').value)
     const courses = Number(document.getElementById('courses').value)
@@ -14,8 +15,32 @@ document.getElementById('calculate').addEventListener('click', function(event){
     // console.log({income, software, courses, internet});
     // console.table ({income, software, courses, internet});          // eita console er vitore table akare show kore
 
+
+    if(income <= 0 || isNaN(income)){
+        document.getElementById('income-error').classList.remove('hidden')
+        return;
+    }
+    else if(software <= 0 || isNaN(software)){
+        document.getElementById('software-error').classList.remove('hidden')
+        return;
+    }
+    else if(courses <= 0 || isNaN(courses)){
+        document.getElementById('courses-error').classList.remove('hidden')
+        return;
+    }
+    else if(internet <= 0 || isNaN(internet)){
+        document.getElementById('internet-error').classList.remove('hidden')
+        return;
+    }
+
+
     const totalExpenses = software + courses + internet
     const balance = income - totalExpenses
+
+    if(income < totalExpenses){
+        document.getElementById('logic-error').classList.remove('hidden')
+        return;
+    }
 
     const totalExpensesElement = document.getElementById('total-expenses')
     totalExpensesElement.innerText = totalExpenses.toFixed(2)
@@ -33,6 +58,7 @@ document.getElementById('calculate').addEventListener('click', function(event){
         historyItem.className = ("bg-white p-3 rounded-md border-l-2 border-indigo-500")
     
         historyItem.innerHTML = `
+            <p class="text-xs text-gray-500">Serial ${count}</p>       
             <p class="text-xs text-gray-500">${new Date().toLocaleDateString()}</p>    
             <p class="text-xs text-gray-500">Income: $ ${income.toFixed(2)}</p>
             <p class="text-xs text-gray-500">Expenses: $ ${totalExpenses.toFixed(2)}</p>
