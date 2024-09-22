@@ -1,19 +1,39 @@
 
+// getting value by function
+
+function getInputValueById (id){
+    const value = Number(document.getElementById(id).value)
+    return value;
+}
+
+
+
+
 // getting all the value
 
 let count = 0;
+
 // add event listener for calculate button
 
 document.getElementById('calculate').addEventListener('click', function(event){
 
     count +=1;                                    // serial number er value barar jonno
-    const income = Number(document.getElementById('income').value)
-    const software = Number(document.getElementById('software').value)
-    const courses = Number(document.getElementById('courses').value)
-    const internet = Number(document.getElementById('internet').value)
+
+    // const income = Number(document.getElementById('income').value)
+    // const software = Number(document.getElementById('software').value)
+    // const courses = Number(document.getElementById('courses').value)
+    // const internet = Number(document.getElementById('internet').value)
        
     // console.log({income, software, courses, internet});
     // console.table ({income, software, courses, internet});          // eita console er vitore table akare show kore
+
+
+    // get value from function
+
+    const income = getInputValueById('income')
+    const software = getInputValueById('software')
+    const courses = getInputValueById('courses')
+    const internet = getInputValueById('internet')
 
 
     if(income <= 0 || isNaN(income)){
@@ -142,4 +162,16 @@ assistantTab.addEventListener('click', function(){
     historySection.classList.add('hidden') 
 
 
+})
+
+
+// live validation for input
+
+document.getElementById('income').addEventListener('input', function(){
+    const inputValue = Number(document.getElementById('income').value)
+
+    if(inputValue <= 0 || isNaN(inputValue)){
+        document.getElementById('income-error').classList.remove('hidden')
+        return;
+    }
 })
