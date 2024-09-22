@@ -25,6 +25,29 @@ document.getElementById('calculate').addEventListener('click', function(event){
 
     const results = document.getElementById('results')
     results.classList.remove('hidden')
+
+
+        // history add 
+
+        const historyItem = document.createElement('div')
+        historyItem.className = ("bg-white p-3 rounded-md border-l-2 border-indigo-500")
+    
+        historyItem.innerHTML = `
+            <p class="text-xs text-gray-500">${new Date().toLocaleDateString()}</p>    
+            <p class="text-xs text-gray-500">Income: $ ${income.toFixed(2)}</p>
+            <p class="text-xs text-gray-500">Expenses: $ ${totalExpenses.toFixed(2)}</p>
+            <p class="text-xs text-gray-500">Balance: $ ${balance.toFixed(2)}</p>
+        `
+        const historyList = document.getElementById('history-list')
+    
+        // appendchild --> korle prottekbar repeat sobar sese asbe
+        // insertBefore --> korle repeat a sobar age asbe
+        // prepend --> ata korleo repeat a sobar age asbe      // insertBefore & prepend er kaj motamuti same
+    
+        // insertBefore --> dui ta value accept kore -->
+        // 1. ki insert korte chai 2. kothay insert korte chai
+        historyList.insertBefore( historyItem, historyList.firstChild)
+
 })
 
 // add event listener for savings button
@@ -61,6 +84,7 @@ const historyTab = document.getElementById('history-tab')
 const assistantTab = document.getElementById('assistant-tab')
 const expenseForm = document.getElementById('expense-form')
 const results = document.getElementById('results')
+const historySection = document.getElementById('history-section')
 
 historyTab.addEventListener('click', function(){
 
@@ -72,8 +96,13 @@ historyTab.addEventListener('click', function(){
     expenseForm.classList.add('hidden')
     
     results.classList.remove('hidden')
+
+    historySection.classList.remove('hidden')                   // history section a history ta vigible korar jonno
+    // document.getElementById('history-section').classList.remove('hidden')       // varriable na niye eivabe direct o kora jay
     
 })
+
+// history tab theke abr assistant tab a switch korar function
 
 assistantTab.addEventListener('click', function(){
     assistantTab.classList.add('text-white', 'bg-gradient-to-r', 'from-blue-500', 'to-purple-600')
@@ -83,6 +112,8 @@ assistantTab.addEventListener('click', function(){
 
     expenseForm.classList.remove('hidden')
     results.classList.add('hidden')
+
+    historySection.classList.add('hidden') 
 
 
 })
